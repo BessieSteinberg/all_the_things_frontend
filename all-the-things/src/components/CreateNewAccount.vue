@@ -26,6 +26,7 @@
           </div>
       </div>
       <button class="button is-primary" @click="submitCreateNewAccount">Submit</button>
+      <button class="button is-primary" @click="getTest">GET</button>
   </div>
 </template>
 
@@ -42,12 +43,17 @@ export default {
   },
   methods: {
     submitCreateNewAccount() {
-      this.$http.post('http://127.0.0.1:8000/users/', JSON.stringify({
+      const body = { 
         display_name: this.displayName,
         username: this.username,
         email_address: this.emailAddress,
         password: this.password,
-      })).then(
+      };
+      this.$http.post(
+          'http://127.0.0.1:8000/users/',
+           JSON.stringify(body),
+           {headers: {'Content-Type': 'application/json'}}
+           ).then(
         (response) => {
           console.log(response);
         },
@@ -57,6 +63,15 @@ export default {
         },
       );
     },
+   getTest() {
+       this.$http.get('http://127.0.0.1:8000/users/')
+       .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        })
+   }
   },
 };
 
