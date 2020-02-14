@@ -34,26 +34,26 @@
 export default {
   name: 'CreateNewAccount',
   data() {
-      return {
-        displayName: null,
-        username: null,
-        emailAddress: null,
-        password: null,
-      };
+    return {
+      displayName: null,
+      username: null,
+      emailAddress: null,
+      password: null,
+    };
   },
   methods: {
     submitCreateNewAccount() {
-      const body = { 
+      const body = {
         display_name: this.displayName,
         username: this.username,
-        email_address: this.emailAddress,
+        email: this.emailAddress,
         password: this.password,
       };
       this.$http.post(
-          'http://127.0.0.1:8000/users/',
-           JSON.stringify(body),
-           {headers: {'Content-Type': 'application/json'}}
-           ).then(
+        'http://127.0.0.1:8000/users/',
+        JSON.stringify(body),
+        { headers: { 'Content-Type': 'application/json' } },
+      ).then(
         (response) => {
           console.log(response);
         },
@@ -63,15 +63,15 @@ export default {
         },
       );
     },
-   getTest() {
-       this.$http.get('http://127.0.0.1:8000/users/')
-       .then(response => {
+    getTest() {
+      this.$http.get('http://127.0.0.1:8000/users/')
+        .then((response) => {
           console.log(response);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
-        })
-   }
+        });
+    },
   },
 };
 
